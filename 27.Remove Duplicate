@@ -1,0 +1,12 @@
+class Solution(object):
+    def removeDuplicates(self, nums):
+        x=set(nums)
+        nums[:]=sorted(list(x))#They want a sorted List
+        print(x)
+        return len(nums)
+
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        
