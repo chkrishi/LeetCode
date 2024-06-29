@@ -1,0 +1,27 @@
+Solution 1   {My own, Rejcetd due to time constraints 198/212 passed}
+
+def maxProfit(self, prices):
+        x=[]
+        y=set(prices)
+        z=len(prices)
+        for l in range(z):
+            for r in reversed(range(l+1,z)):
+                if prices[r] > prices[l]:
+                    x.append(prices[r]-prices[l])
+        if(len(x)==0):
+            return 0
+        x.sort(reverse=True)
+        return x[0]
+
+Solutin 2 {With Editorial Help}
+class Solution:
+    def maxProfit(self, prices):
+        buy = prices[0] #To search for the least element in the array
+        profit = 0 #Create a variable to keep track of profit
+        for i in range(1, len(prices)):
+            if prices[i] < buy: #traverse to find the least element in the array
+                buy = prices[i] #When least element if found , assign it to buy
+            elif prices[i] - buy > profit: #Else if The current traversal element - The least value element in the array{buy} is greater than profit value{0 or other prior value}
+                profit = prices[i] - buy #update new profit value
+        return profit
+
