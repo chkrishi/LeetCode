@@ -1,0 +1,42 @@
+#Accepted Solution
+#Counter counts all the occurances of all elements in a list
+#if the occurance is greater than or equal to 3 and (it is even) then add 2 to res; 
+#if the occurance is greater than or equal to 3 and (it is odd) then add 1 to res;
+#if the occurance is less than 3 add to the value to res and return.
+
+from collections import Counter
+class Solution(object):
+    def minimumLength(self, s):
+        n = len(s)
+        y = [a for a in s]
+        res = 0
+        count = Counter(y)
+        x = count.values()
+        for i in x:
+            if i >= 3:
+                if i % 2 == 0:
+                    res = res + 2
+                else :
+                    res = res + 1
+            else :
+                res = res + i
+        return res 
+______________________________________________________________________________________________
+#Old solution with 673 / 702 solutions have been accepted {Time limit Exceeded}
+from collections import Counter
+class Solution(object):
+    def minimumLength(self, s):
+        n = len(s)
+        y = [a for a in s]
+        res = 0
+        count = Counter(y)
+        x = count.values()
+        for i in x:
+            if i >= 3:
+                if i % 2 == 0:
+                    res = res + 2
+                else :
+                    res = res + 1
+            else :
+                res = res + i
+        return res 
