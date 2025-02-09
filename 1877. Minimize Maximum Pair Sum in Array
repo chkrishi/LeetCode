@@ -1,0 +1,27 @@
+#My refined soln usign CHATGPT
+class Solution(object):
+    def minPairSum(self, nums):
+        nums = sorted(nums)
+        i,j = 0,len(nums)-1
+        maxpair = 0
+        sumval = 0
+        while i < j:
+            sumval = nums[i] + nums[j]
+            maxpair = max(sumval,maxpair)
+            i += 1
+            j -= 1
+        return maxpair
+______________________________________________________________
+#My original soln(Accepted)
+class Solution(object):
+    def minPairSum(self, nums):
+        nums = sorted(nums)
+        i,j = 0,len(nums)-1
+        arr = []
+        sumval = 0
+        while i < len(nums) and i != j:
+            sumval = nums[i] + nums[j]
+            arr.append(sumval)
+            i += 1
+            j -= 1
+        return max(arr)
