@@ -1,0 +1,9 @@
+#line no4,5 from chatgpt
+class Solution(object):
+    def reversePrefix(self, word, ch):
+        if ch not in word:
+            return word
+        val = word.index(ch)
+        tempval = word[:val+1]
+        finalval = tempval[::-1]+word[val+1:]
+        return finalval
