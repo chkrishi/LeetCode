@@ -1,0 +1,18 @@
+class Solution(object):
+    def threeSum(self, nums):
+        nums.sort()
+        arr = set()
+        for i in range(len(nums)):
+            j = i + 1
+            k = len(nums) - 1
+            while j < k:
+                sumval = nums[i] + nums[j] + nums[k]
+                if sumval == 0:
+                    arr.add((nums[i], nums[j], nums[k]))
+                    j += 1
+                    k -= 1
+                elif sumval < 0:
+                    j += 1
+                else:
+                    k -= 1
+        return list(arr)
