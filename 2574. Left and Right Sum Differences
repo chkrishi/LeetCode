@@ -1,0 +1,21 @@
+class Solution(object):
+    def leftRightDifference(self, nums):
+        larr = [1] * len(nums)
+        rarr = [1] * len(nums)
+        final = [1] * len(nums)
+        larr[0] = 0
+        rarr[0] = 0
+        for i in range(1,len(nums)):
+            larr[i] = larr[i-1] + nums[i-1]
+        newarr = nums[::-1]
+        for i in range(1,len(newarr)):
+            rarr[i] = rarr[i-1] + newarr[i-1]
+        rarr = rarr[::-1]
+        for i in range(len(rarr)):
+            final[i] = abs(rarr[i]-larr[i])
+        return final
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        
