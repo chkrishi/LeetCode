@@ -1,0 +1,15 @@
+#Solved using Solutions
+class Solution(object):
+    def clearDigits(self, s):
+        soln = ""
+        for i in s:
+            if i.isdigit():
+                if len(soln) > 0:
+                    soln = soln[:-1]
+            else:
+                soln += i
+        return soln
+
+        
+        return ''.join(s)
+        
