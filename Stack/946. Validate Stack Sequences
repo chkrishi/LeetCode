@@ -1,0 +1,21 @@
+class Solution(object):
+    def validateStackSequences(self, pushed, popped):
+        arr = []
+        count = 0
+        while len(popped) > 0 :
+            topval = popped[0]
+            if len(arr) != 0 and arr[len(arr)-1] == topval:
+                popped = popped[1:]
+                arr = arr[:-1]
+                continue
+            elif count < len(pushed):
+                arr.append(pushed[count])
+                count += 1
+                continue
+            else :
+                return False
+        if len(arr) == 0:
+            return True
+        else:
+            return False
+        
