@@ -1,0 +1,60 @@
+#Initial soln using 1 stack
+class Solution(object):
+    def asteroidCollision(self, asteroids):
+        result = True
+        i = 0
+        while result:
+            if len(asteroids) < i and i != 0:
+                result = False
+            elif i >= 0 and asteroids[i-1] > 0 and asteroids[i] < 0:
+                if asteroids[i-1] == asteroids[i]:
+                    asteroids.remove(asteroids[i-1])
+                    print(asteroids)
+                    asteroids.remove(asteroids[i-1])
+                    print(asteroids)
+                elif asteroids[i-1] > abs(asteroids[i]):
+                    asteroids.remove(asteroids[i])
+                    print(asteroids)
+                elif asteroids[i-1] < abs(asteroids[i]):
+                    asteroids.remove(asteroids[i-1])
+                    print(asteroids)
+            i += 1
+        return asteroids
+_________________________________________________________________________________________________________________________
+#2nd soln using chagpt idea i.e using 2 Stacks
+class Solution(object):
+    def asteroidCollision(self, aster):
+        stackval = []
+        x = True
+        for val in aster:
+            while len(stackval) > 0 and val < 0 and stackval[-1] > 0:
+                x = False
+                if stackval[-1] == abs(val):
+                    print(stackval)
+                    stackval.pop()
+                    print(stackval)
+                elif stackval[-1] > abs(val):
+                    break
+                elif stackval[-1] < abs(val):
+                    stackval.pop()
+            if x==True and val > 0:
+                stackval.append(val)
+                x = True
+        return stackval
+_____________________________________________________________________________________________________________________________
+#4th soln, mistakes removed by ChatGPT
+class Solution(object):
+    def asteroidCollision(self, aster):
+        stackval = []
+        for val in aster:
+            while len(stackval) > 0 and val < 0 and stackval[-1] > 0:
+                if stackval[-1] == abs(val):
+                    stackval.pop()
+                    break
+                elif stackval[-1] < abs(val):
+                    stackval.pop()
+                else:
+                    break
+            else:
+                stackval.append(val)
+        return stackval
