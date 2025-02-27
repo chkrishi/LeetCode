@@ -1,0 +1,47 @@
+#My solution, TIME LIMIT EXCEEDED
+'class Solution(object):
+    def addMinimum(self, word):
+        arr = []
+        count,i = 0,0
+        while i < len(word):
+            if word[i] == 'a' and i == 0:
+                arr.append(word[i])
+                count += 1
+            elif word[i] == 'a' and word[i-1] != 'c' and word[i-1] != 'b' and word[i-1] != 'a' and i > 0:
+                arr.append('a')
+                i += 1
+            elif word[i] == 'b' and word[i-1] == 'a' and word[i+1] != 'c' and i > 0:
+                arr.append('b')
+                i += 1
+            elif word[i] == 'c' and word[i-1] == 'b' and word[i-2] != 'a' and i > 0:
+                arr.append('c')
+                i += 1
+            elif word[i] == 'b' and word[i-1] != 'a' and i > 0:
+                arr.append('a')
+                count += 1
+                arr.append('b')
+                i = 0
+            elif word[i] == 'c' and word[i-1] != b and i > 0:
+                arr.append('b')
+                arr.append('c')
+                count += 1
+                i = 0
+        return count
+_____________________________________________________________________________________________________________________
+
+#SRK's Solution
+class Solution(object):
+    def addMinimum(self, word):
+        count = 0
+        if 'abc' in word:
+            word = word.replace('abc','|')
+        count = word.count('ab') + word.count('bc') + word.count('ac')
+        if 'ab' in word:
+            word = word.replace('ab','|')
+        if 'bc' in word:
+            word = word.replace('bc','|')
+        if 'ac' in word:
+            word = word.replace('ac','|')
+        count += (word.count('a') + word.count('b') + word.count('c'))*2
+        return count
+        
