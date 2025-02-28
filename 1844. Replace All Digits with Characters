@@ -1,0 +1,11 @@
+class Solution(object):
+    def replaceDigits(self, s):
+        i,arr = 0,[]
+        for i in range(0,len(s)):
+            if i % 2 == 1:
+                val = ord(s[i-1]) + int(s[i])
+                arr.append(chr(val))
+            else:
+                arr.append(s[i])
+                continue
+        return ''.join(arr)
