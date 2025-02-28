@@ -1,0 +1,23 @@
+#My own soln (ACCEPTED)
+class Solution(object):
+    def simplifyPath(self, path):
+        path = path.split('/')
+        resval = []
+        for i in path:
+            if i == "" or i == " ":
+                continue
+            elif i == ".":
+                continue
+            elif i == ".." and len(resval) > 0:
+                resval.pop()
+            elif i == ".." and len(resval) <= 0:
+                continue
+            else:
+                resval.append(i)
+        path = '/' + '/'.join(resval)
+        return path
+        """
+        :type path: str
+        :rtype: str
+        """
+        
