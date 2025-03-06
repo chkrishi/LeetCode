@@ -1,0 +1,14 @@
+#My own code
+class Solution(object):
+    def findMissingAndRepeatedValues(self, grid):
+        arr = []
+        retval = [0,0]
+        for i in range(0,len(grid)):
+            arr += grid[i]
+        for i in range(1,len(grid[i])**2 + 1):
+            count = arr.count(i)
+            if count == 2:
+                retval[0] = i
+            if i not in arr:
+                retval[1] = i
+        return retval       
