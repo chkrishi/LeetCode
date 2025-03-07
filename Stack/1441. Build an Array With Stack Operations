@@ -1,0 +1,11 @@
+#My own solution(Beats 100%)
+class Solution(object):
+    def buildArray(self, target, n):
+        arr = []
+        for i in range(1,max(target)+1):
+            arr.append("Push")
+            if i == n:
+                return arr
+            if i not in target:
+                arr.append("Pop")
+        return arr
