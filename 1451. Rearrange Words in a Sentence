@@ -1,0 +1,11 @@
+#Didn't understand any thing about question but i understood the answer from the Solutions section and implemented it.
+class Solution(object):
+    def arrangeWords(self, text):
+        arr = []
+        for i in text.split():
+            arr.append(i.lower())
+        arr = sorted(arr,key = len)
+        val = arr[0].capitalize()
+        #Capitalize only capitalizes the first letter
+        arr = [val] + arr[1:] 
+        return ' '.join(arr)
