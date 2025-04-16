@@ -1,0 +1,13 @@
+#My own solution
+class Solution(object):
+    def middleNode(self, head):
+        arr = []
+        while head.next:
+            arr.append(head.val)
+            head = head.next
+        arr.append(head.val)
+        arr = arr[len(arr) // 2:]
+        p1 = ListNode(arr[-1])
+        for i in range(len(arr)-2,-1,-1):
+            p1 = ListNode(arr[i],p1)
+        return p1
