@@ -1,0 +1,26 @@
+# How i Did it
+class Solution(object):
+    def doubleIt(self, head):
+        strval = ""
+        while head:
+            strval += str(head.val)
+            head = head.next
+        strval = list(str(2 * int(strval)))
+        strval = strval[::-1]  
+        p1 = ListNode(int(strval[0]))
+        for i in range(1,len(strval)):
+            p1 = ListNode(int(strval[i]),p1)
+        return p1      
+_______________________________________________________________________
+
+# How it's actually supposed to be don
+    def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head.val > 4:
+            head = ListNode(0, head)
+        node = head
+        while node:
+            node.val = (node.val * 2) % 10
+            if node.next and node.next.val > 4:
+                node.val += 1
+            node = node.next
+        return head
