@@ -1,0 +1,75 @@
+#My solution                                      SLOW
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def reverseBetween(self, head, left, right):
+        arr = []
+        while head:
+            arr.append(head.val)
+            head = head.next
+        left -= 1
+        right -= 1
+        tempval = arr[left:right+1]
+        arr = arr[:left] + tempval[::-1] + arr[right+1:]
+        print(arr,left,right)
+        arr = arr[::-1]
+        p1 = ListNode(arr[0])
+        for i in range(1,len(arr)):
+            p1 = ListNode(arr[i],p1)
+        return p1
+____________________________________________________________________________________________________________________________________________________________________
+# Fastest and the correct way to do it.
+class Solution(object):
+    def reverseBetween(self, head, left, right):
+        """
+        :type head: ListNode
+        :type left: int
+        :type right: int
+        :rtype: ListNode
+        """   
+        dummy = ListNode()
+        dummy.next = head
+        prev = dummy
+        curr = dummy.next
+        for _ in range(left-1):
+            prev = prev.next
+            curr = curr.next
+        rev = None
+        for _ in range(right - left + 1):
+            temp = curr.next
+            curr.next = rev
+            rev = curr
+            curr = temp
+        prev.next.next = curr
+        prev.next = rev
+        return dummy.next
+
+#         dummy = ListNode()
+#         dummy.next = head
+#         leftPrev = dummy
+#         curr = head
+#         # 1. Reach ndoe at position "left"
+#         for i in range(left-1):
+#             leftPrev = leftPrev.next # or equal to curr
+#             curr = curr.next
+#         # curr = "left", leftPrev = "node before left"
+#         #2. reverse left to right
+#         prev = None
+#         for i in range(right-left+1):
+#             temp = curr.next
+#             curr.next = prev
+#             prev = curr
+#             curr = temp
+#         print(leftPrev)
+#         # prev = ListNode{val: 4, next: ListNode{val: 3, next: ListNode{val: 2, next: None}}}
+#         # curr = nodeval = 5
+#         # leftPrev = ListNode{val: 1, next: ListNode{val: 2, next: None}}
+#         #3 update pointers that are not in left/right
+#         # get to node 2 and point to 5
+#         leftPrev.next.next = curr
+#         # point (1 next pointer) to the beginning of reverse list
+#         leftPrev.next = prev
+#         return dummy.next        
