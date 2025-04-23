@@ -1,0 +1,14 @@
+class Solution(object):
+    def mergeInBetween(self, list1, a, b, list2):
+        ptr = list1
+        for i in range(a-1):
+            ptr = ptr.next #Iterate till the a point in list 1
+        qtr = ptr.next
+        for i in range(b-a+1):
+            qtr = qtr.next #Iterate till the end point of 
+        ptr.next = list2 #Connect the ptr end point to list2
+        while list2.next:
+            list2 = list2.next
+        list2.next = qtr #Connect the list2 end point to qtr
+        return list1
+        
