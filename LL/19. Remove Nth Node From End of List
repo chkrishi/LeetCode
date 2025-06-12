@@ -1,0 +1,45 @@
+//My own soln with chagpt rectifications in some places
+class Solution(object):
+    def removeNthFromEnd(self, head, n):
+        val = self.sizeofLL(head)
+        rev_head = self.removeAtVal(head,val,n)
+        return rev_head
+    def removeAtVal(self,head,lval,n):
+        val = lval - n
+        i = 1
+        current = head
+        if val == 0:
+            return head.next
+        while current and current.next :
+            if i == val :
+                current.next = current.next.next
+                break
+            else:
+                current = current.next
+            i += 1
+        return head
+    def sizeofLL(self,head):
+        size = 0
+        current = head
+        while current :
+            current = current.next
+            size += 1
+        return size
+
+
+
+
+
+
+
+
+
+// The below code is an not necessary
+def reverseList(self,head):
+        prev  = None
+        while head:
+	        next_node = head.next
+	        head.next = prev
+	        prev = head
+	        head = next_node
+        return head
