@@ -1,0 +1,20 @@
+#My own Solun
+class Solution(object):
+    def deleteDuplicates(self, head):
+        curr = head
+        arr = set()
+        new = ListNode()
+        newcrr = new
+        if not head or not head.next:
+            return head
+        while curr.next:
+            if curr.val == curr.next.val:
+                arr.add(curr.val)
+            elif curr.val not in arr:
+                newcrr.next = ListNode(curr.val)
+                newcrr = newcrr.next
+            curr = curr.next
+        if curr.val not in arr:
+            newcrr.next = ListNode(curr.val)
+            newcrr = newcrr.next
+        return new.next
