@@ -1,0 +1,23 @@
+#My own soln
+class Solution(object):
+    def deleteMiddle(self, head):
+        if not head or not head.next:
+            return None
+        count = self.lengthofLL(head)
+        val = count // 2
+        curr = head
+        i = 0
+        while curr:
+            if i == val-1:
+                curr.next = curr.next.next
+                i += 1
+            else:
+                curr = curr.next
+                i += 1
+        return head
+    def lengthofLL(self,head):
+        count = 0
+        while head:
+            count += 1
+            head = head.next
+        return count
