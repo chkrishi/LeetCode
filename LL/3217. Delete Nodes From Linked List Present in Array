@@ -1,0 +1,36 @@
+#My soln [REJECTED]
+class Solution(object):
+    def modifiedList(self, nums, head):
+        nums = set(nums)
+        if not head:
+            return None
+        while head and head.val in nums:
+            head = head.next
+        curr = head
+        prev = curr
+        init = prev
+        while curr:
+            if curr.val not in nums:
+                prev.next = curr
+                prev = prev.next
+            curr = curr.next
+        prev.next = None
+        return init
+___________________________________________________________________________________________________________________________________________
+#Help From soln [ACCEPTED]
+class Solution(object):
+    def modifiedList(self, nums, head):
+        nums = set(nums)
+        if not head:
+            return None
+        while head.val in nums:
+            head = head.next
+        retval = ListNode(0)
+        new = retval
+        new.next = ListNode(head.val)
+        while head:
+            if head.val not in nums:
+                new.next = ListNode(head.val)
+                new = new.next
+            head = head.next
+        return retval.next
