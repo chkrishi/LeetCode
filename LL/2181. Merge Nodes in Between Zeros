@@ -1,0 +1,14 @@
+class Solution(object):
+    def mergeNodes(self, head):
+        sval = 0
+        curr = ListNode(0)
+        new = curr
+        while head:
+            if sval != 0 and head.val == 0:
+                curr.next = ListNode(sval)
+                curr = curr.next
+                sval = 0
+            elif head.val != 0:
+                sval += head.val
+            head = head.next
+        return new.next
