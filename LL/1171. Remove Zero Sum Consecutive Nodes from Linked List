@@ -1,0 +1,70 @@
+# Original soln mine ---> Loop issues so rejected
+class Solution(object):
+    def removeZeroSumSublists(self, head):
+        arr = self.getvalues(head)
+        sumval,i,j = 0, 0,0
+        n = True
+        while n == True:
+            n = False
+            sumval += arr[i]
+            print(sumval,i)
+            if sumval == 0:
+                n = True
+                sumval = 0
+                arr = arr[i:]
+            i += 1
+        print(arr)
+        ln = self.getll(arr)
+        return ln
+    def getll(self,arr):
+        head = ListNode(0)
+        curr = head
+        for i in arr:
+            curr.next = ListNode(i)
+            curr = curr.next
+        return head.next
+    def getvalues(self,head):
+        arr = []
+        while head:
+            arr.append(head.val)
+            head = head.next
+        return arr
+______________________________________________________________________________________________________________________________________________________________________________________________________________________-
+
+# Help from CHATGPT, accepted
+class Solution(object):
+    def removeZeroSumSublists(self, head):
+        arr = self.getvalues(head)
+
+        changed = True
+        while changed:
+            changed = False
+            for i in range(len(arr)):
+                sumval = 0
+                for j in range(i, len(arr)):
+                    sumval += arr[j]
+                    if sumval == 0:
+                        # Remove the subarray from i to j (inclusive)
+                        arr = arr[:i] + arr[j+1:]
+                        changed = True
+                        break
+                if changed:
+                    break  # Restart outer loop
+
+        ln = self.getll(arr)
+        return ln
+
+    def getll(self, arr):
+        head = ListNode(0)
+        curr = head
+        for val in arr:
+            curr.next = ListNode(val)
+            curr = curr.next
+        return head.next
+
+    def getvalues(self, head):
+        arr = []
+        while head:
+            arr.append(head.val)
+            head = head.next
+        return arr
