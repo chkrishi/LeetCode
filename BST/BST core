@@ -1,0 +1,96 @@
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+==============================================================================================================================================================================
+def insert(root, key):
+    if root is None:
+        return Node(key)
+    if key < root.value:
+        root.left = insert(root.left, key)
+    else:
+        root.right = insert(root.right, key)
+    return root
+==============================================================================================================================================================================
+def search(root, key):
+    if root is None or root.value == key:
+        return root
+    if key < root.value:
+        return search(root.left, key)
+    return search(root.right, key)
+==============================================================================================================================================================================
+def delete(root, key):
+    if not root:
+        return None
+    if key < root.value:
+        root.left = delete(root.left, key)
+    elif key > root.value:
+        root.right = delete(root.right, key)
+    else:
+        if not root.left:
+            return root.right
+        elif not root.right:
+            return root.left
+        temp = find_min(root.right)
+        root.value = temp.value
+        root.right = delete(root.right, temp.value)
+    return root
+==============================================================================================================================================================================
+def height(root):
+    if not root:
+        return 0
+    return 1 + max(height(root.left), height(root.right))
+==============================================================================================================================================================================
+def is_balanced(root):
+    if not root:
+        return True
+
+    lh = height(root.left)
+    rh = height(root.right)
+    if abs(lh - rh) <= 1 and is_balanced(root.left) and is_balanced(root.right):
+        return True
+    return False
+==============================================================================================================================================================================
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.value, end=" ")
+        inorder(root.right)
+==============================================================================================================================================================================
+def preorder(root):
+    if root:
+        print(root.value, end=" ")
+        preorder(root.left)
+        preorder(root.right)
+==============================================================================================================================================================================
+def postorder(root):
+    if root:
+        postorder(root.left)
+        postorder(root.right)
+        print(root.value, end=" ")
+==============================================================================================================================================================================
+from collections import deque
+def level_order(root): ---> BFS
+    if not root:
+        return
+    queue = deque([root])
+    while queue:
+        node = queue.popleft()
+        print(node.value, end=" ")
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
+==============================================================================================================================================================================
+def find_min(root):
+    current = root
+    while current.left:
+        current = current.left
+    return current
+==============================================================================================================================================================================
+def find_max(root):
+    current = root
+    while current.right:
+        current = current.right
+    return current
