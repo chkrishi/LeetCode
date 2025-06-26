@@ -1,0 +1,10 @@
+#Took help from solns
+class Solution(object):
+    def maxDepth(self, root):
+        return self.max_depth(root)
+    def max_depth(self,val):
+        if val is None:
+            return 0
+        left = self.max_depth(val.left)
+        right = self.max_depth(val.right)
+        return max(left,right) + 1
