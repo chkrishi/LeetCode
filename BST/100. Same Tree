@@ -1,0 +1,15 @@
+class Solution(object):
+    def isSameTree(self, p, q):
+        if p == None and q == None:
+            return True
+        elif p == None or q == None:
+            return False 
+        return self.ismatch(p,q)
+    def ismatch(self, lef, rig):
+        if lef is None and rig is None:
+            return True
+        if lef is None or rig is None:
+            return False
+        if lef.val != rig.val:
+            return False
+        return self.ismatch(lef.left, rig.left) and self.ismatch(lef.right, rig.right)
