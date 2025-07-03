@@ -1,0 +1,35 @@
+# My original soln [77/86] Accepted
+class Solution(object):
+    def isValidBST(self, root):
+        return self.bst(root)
+    def bst(self,root):
+        if root is None:
+            return True
+        elif root.left is not None and root.left.val >= root.val:
+            return False
+        elif root.right is not None and root.right.val <= root.val:
+            return False
+        elif root.left is None and root.right is None:
+            return True
+        else:
+            return self.bst(root.left) and self.bst(root.right)
+
+# Help from chatGPT
+class Solution(object):
+    def isValidBST(self, root):
+        return self.bst(root)
+    def bst(self,root,minval = float('-inf'),maxval = float('inf')):
+        if root is None:
+            return True
+        elif root.val <= minval or root.val >= maxval:
+            return False
+        elif root.left is not None and root.left.val >= root.val:
+            return False
+        elif root.right is not None and root.right.val <= root.val:
+            return False
+        elif root.left is None and root.right is None:
+            return True
+        else:
+            return self.bst(root.left,minval,root.val) and self.bst(root.right,root.val,maxval)
+            # for root.left -> root.val is maxval and minval remains as it is
+            # for root.right -> maxval remains as it and minval is root.val
