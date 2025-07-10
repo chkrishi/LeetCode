@@ -1,0 +1,16 @@
+#80% of my code & help of soln section
+class Solution(object):
+    def sumNumbers(self, root):
+        def preorder(root,strval,arr):
+            if not root:
+                return 
+            strval += str(root.val)
+            if not root.left and not root.right:
+                arr.append(int(strval))  
+                return   
+            else:
+                preorder(root.left,strval,arr)
+                preorder(root.right,strval,arr)         
+        arr = []
+        preorder(root,"",arr)
+        return sum(arr)
