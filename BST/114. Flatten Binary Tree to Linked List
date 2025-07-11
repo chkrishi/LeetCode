@@ -1,24 +1,18 @@
-# Optimal soln by chatGPT -> I understood nothing as of now.
-class Solution(object):
+# Optimal soln from submitted solns section -> single pass [Just rewire the left to the right]
+class Solution:
     def flatten(self, root):
-        if not root:
-            return
-        self.PreorderTraversal(root)
-    def PreorderTraversal(self,node):
-          if not node:
-              return None
-          left_tail = helper(node.left)
-          right_tail = helper(node.right)
-
-          if node.left:
-              # Attach left subtree between node and right subtree
-              if left_tail:
-                  left_tail.right = node.right
-              node.right = node.left
-              node.left = None
-
-          # Return the last node of the flattened subtree
-          return right_tail or left_tail or node
+        current = root
+        while current:
+            if current.left:
+                # Find the rightmost node of the left subtree
+                rightmost = current.left
+                while rightmost.right:
+                    rightmost = rightmost.right
+                # Rewire the connections
+                rightmost.right = current.right
+                current.right = current.left
+                current.left = None
+            current = current.right
 
         
 ________________________________________________________________________________________________________________________________________________________________________
