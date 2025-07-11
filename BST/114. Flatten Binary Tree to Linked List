@@ -1,0 +1,44 @@
+# Optimal soln by chatGPT -> I understood nothing as of now.
+class Solution(object):
+    def flatten(self, root):
+        if not root:
+            return
+        self.PreorderTraversal(root)
+    def PreorderTraversal(self,node):
+          if not node:
+              return None
+          left_tail = helper(node.left)
+          right_tail = helper(node.right)
+
+          if node.left:
+              # Attach left subtree between node and right subtree
+              if left_tail:
+                  left_tail.right = node.right
+              node.right = node.left
+              node.left = None
+
+          # Return the last node of the flattened subtree
+          return right_tail or left_tail or node
+
+        
+________________________________________________________________________________________________________________________________________________________________________
+#98% my own soln except for line 18 -_- where i used curr.right = arr[i] instead of TreeNode
+#Not an optimal soln as its a 2 pass method
+class Solution(object):
+    def flatten(self, root):
+        def lvalued(root):
+            if root is None:
+                return  
+            elif root.left is None and root.right is None:
+                arr.append(int(root.val))
+            else:
+                arr.append(int(root.val))
+                lvalued(root.left)
+                lvalued(root.right)
+        i = 0 
+        curr,arr = root,[]
+        lvalued(root)
+        for i in range(1,len(arr)):
+            curr.left = None
+            curr.right = TreeNode(arr[i])
+            curr = curr.right
