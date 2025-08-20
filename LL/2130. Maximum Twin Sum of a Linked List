@@ -1,0 +1,16 @@
+#My own soln
+class Solution:
+    def pairSum(self, head: Optional[ListNode]) -> int:
+        stk = []
+        arrsum = []
+        slow = head
+        fast = head
+        while fast != None and fast.next != None:
+            stk.append(slow.val)
+            slow = slow.next
+            fast = fast.next.next
+        while slow:
+            arrsum.append(slow.val + stk[-1])
+            stk.pop()
+            slow = slow.next
+        return max(arrsum)
