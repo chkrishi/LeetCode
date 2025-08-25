@@ -15,18 +15,20 @@ class Solution:
         arr.append(mat[1][0])
         while i < m and j < n and m < mmax and n < nmax:
             if nm % 2 == 0:
-                while 0 < i < m and 0 < j < n:
+                while i < m and j < n:
                     i += 1
                     j -= 1 
                     j = 0 if j < 0 else j
                     arr.append(mat[i][j])
             else :
-                while 0 < i < m and 0 < j < n:
+                while i < m and j < n:
                     i -= 1
                     i = 0 if i < 0 else i
                     j += 1
                     arr.append(mat[i][j])
             nm += 1
+            m += 1
+            n += 1
         arr.append(mat[mmax-1][nmax-1])
         return arr
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________
