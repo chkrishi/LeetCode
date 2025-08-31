@@ -1,0 +1,41 @@
+#From ChatGPT 
+class Solution:
+    def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        
+        odd = head                                                               #Goes for odd indexed nodes
+        even = head.next                                                         #Goes for even indexed nodes
+        temp = even                                                              #Points to the unused even nodes that are not used in the below loop
+        while even and even.next:
+            odd.next = even.next
+            odd = odd.next
+            even.next = odd.next
+            even = even.next
+        odd.next = temp                                                           #Now attach the leftovers and return head
+        return head
+___________________________________________________________________________________________________________________________________________________________________________________________________________________
+#My solution, but TLE
+class Solution:
+    def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return head
+        slow,fast = head,head.next
+        tempval = head
+        while fast:
+            slow = slow.next
+            fast = fast.next.next
+        prev = slow
+        midval = slow
+        while slow:
+            curr = slow.next
+            curr.next = prev
+            prev = curr
+            curr = prev
+        temp = none
+        while midval:
+            tempval.next = midval
+            midval.next = tempval.next
+            tempval = tempval.next
+            midval = midval.next
+        return head
