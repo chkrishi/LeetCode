@@ -1,0 +1,36 @@
+#My own solution.
+class Solution:
+    def leafSimilar(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
+        def valueofnodes1(val1: Optional[TreeNode]):
+            if not val1:
+                return
+            if val1.left is None and val1.right is None:
+                arr1.append(val1.val)
+            else:
+                valueofnodes1(val1.left)
+                valueofnodes1(val1.right)
+
+        def valueofnodes2(val2: Optional[TreeNode]):
+            if not val2:
+                return
+            if val2.left is None and val2.right is None:
+                arr2.append(val2.val)
+            else:
+                valueofnodes2(val2.left)
+                valueofnodes2(val2.right)
+
+        arr1, arr2 = [], []
+        valueofnodes1(root1)
+        valueofnodes2(root2)
+
+        return arr1 == arr2
+___________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#An optimized soln found in solns section 
+class Solution:
+    def leafSimilar(self, root1: TreeNode, root2: TreeNode) -> bool:
+        def dfs(root):                              
+            if not root: return []                 
+            if not root.left and not root.right:    
+                return [root.val]                  
+            return dfs(root.left) + dfs(root.right) 
+        return dfs(root1) == dfs(root2) 
