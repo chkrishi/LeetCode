@@ -1,0 +1,17 @@
+#My own soln 
+class Solution:
+    def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
+        def val(rootval: Optional[TreeNode]) -> None:
+            if not rootval:
+                return 
+            else:
+                val(rootval.left)
+                arr.append(rootval.val)
+                val(rootval.right)
+        arr = []
+        val(root)
+        arr = sorted(arr)
+        ans = float('inf')
+        for i in range(1,len(arr)):
+            ans = min(ans,arr[i]-arr[i-1])
+        return ans
