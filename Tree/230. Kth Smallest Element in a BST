@@ -1,0 +1,38 @@
+#My soln but large and inefficient [CODE ACCEPTED]
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        arr = []
+        def val(rootval: Optional[TreeNode]) -> None:
+            if not rootval:
+                return 
+            elif rootval.left and rootval.right:
+                arr.append(rootval.val)
+                val(rootval.left)
+                val(rootval.right)
+            elif rootval.left is None and rootval.right:
+                arr.append(rootval.val)
+                val(rootval.right)
+            elif rootval.right is None and rootval.left:
+                arr.append(rootval.val)
+                val(rootval.left)
+            elif rootval.right is None and rootval.left is None:
+                arr.append(rootval.val)
+        val(root)
+        arr = sorted(arr)
+        return arr[k-1]
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#An alternative would be to use Inorder Traversal
+
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        arr = []
+
+        def inorder(node: Optional[TreeNode]) -> None:
+            if not node:
+                return
+            inorder(node.left)        # visit left
+            arr.append(node.val)      # visit node
+            inorder(node.right)       # visit right
+
+        inorder(root)
+        return arr[k - 1]
