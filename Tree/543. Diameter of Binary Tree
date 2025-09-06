@@ -1,0 +1,42 @@
+#My solution, but failed in cases where they shared a common path as common path is considered as 0
+class Solution:
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        def rightval(rootval: Optional[TreeNode], n: int) -> None:
+            if not rootval:
+                return 
+            elif rootval.left is None and rootval.right is None:
+                rarr.append(n)
+                n -= 1
+            elif rootval.right is None and rootval.left:
+                rightval(rootval.left,n)
+            else:
+                n += 1
+                rightval(rootval.right,n)
+        def leftval(rootval: Optional[TreeNode],m : int)-> None:
+            if not rootval:
+                return 
+            elif rootval.left is None and rootval.right is None:
+                larr.append(m)
+                m -= 1
+            elif rootval.left is None and rootval.right:
+                leftval(rootval.right,m)
+            else:
+                m += 1
+                leftval(rootval.left,m)
+        n,m = 0,0
+        larr,rarr = [],[]
+        rightval(root,n)
+        leftval(root,m)
+        return max(larr) + max(rarr) 
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#Found in solutions section
+
+class Solution:
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        def depthmax(node: TreeNode) -> int:
+            if not node:
+                return 0 
+            left = depthmax(node.left) #Go to the utmost left one
+            right = depthmax(node.right) #Go to the utomost right one
+            return max(left,right) + 1 #Return the depth of the one with the max depth b/w root.left and root.right and include root as +1.
+        return depthmax(root.left) + depthmax(root.right) #Do it for both the sides.
