@@ -1,0 +1,65 @@
+#My own soln but TLE
+
+class Solution(object):
+    def totalSteps(self, nums):
+        n,flag = 0,0
+        arr = []
+        while flag != 1:
+            flag = 0
+            arr.append(nums[0])
+            for i in range(1,len(nums)):
+                if nums[i-1] >= nums[i]:
+                    flag = 1
+                elif nums[i-1] < nums[i]:
+                    arr.append(nums[i])
+            if flag == 1:
+                nums = arr
+                n += 1
+        return n
+___________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+# Took help from soln's section --------------> Will work but we will try the Linked list way
+
+Cheat during the contest to save time, convert linked list to a list and then just do slice reversion.
+Of course cost extra O(n) space
+
+def reverseEvenLengthGroups(self, head):
+	a = []
+	node = head
+	while node:
+		a.append(node.val)
+		node = node.next
+	i, d, n = 0, 1, len(a)
+	while i < n:
+		if min(d, n-i) & 1 == 0:
+			a[i:i+d] = a[i:i+d][::-1]
+		i += d
+		d += 1
+	node = head
+	for x in a:
+		node.val = x
+		node = node.next
+	return head
+
+___________________________________________________________________________________________________________________________________________________________________________________________________________________________
+# Directly from the solns section but with my vairiable names ---> working
+class Solution(object):
+    def reverseEvenLengthGroups(self, head):
+        val = 2  # group size (same as d in your solution)
+        temp = head
+        while temp.next:
+            curr, n = temp, 0
+            for i in range(val):
+                if not curr.next:
+                    break
+                n += 1
+                curr = curr.next
+            if n % 2 == 1:  # odd length
+                temp = curr
+            else:           # even length
+                node, prev = temp.next, None
+                for i in range(n):
+                    node.next, node, prev = prev, node.next, node
+                temp.next.next, temp.next, temp = node, prev, temp.next
+            val += 1
+        return head
