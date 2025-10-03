@@ -1,0 +1,44 @@
+#My solution ---> Completely own
+class Solution:
+    def getStrongest(self, arr: List[int], k: int) -> List[int]:
+        if len(arr) == 1:
+            return arr
+        arr.sort()
+        midval = arr[(len(arr) - 1) // 2]
+        narr = []
+        for i in arr:
+            narr.append([i,abs(midval-i)])
+        narr = sorted(narr, key = lambda x : (x[1],x[0]), reverse = True) --> #Lamda sorts by priority, x[1] and then by x[0]
+        farr = []
+        for i in range(0,k):
+            farr.append(narr[i][0])
+        return farr
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#Shortcut Variant
+class Solution:
+    def getStrongest(self, arr: List[int], k: int) -> List[int]:
+        if len(arr) == 1:
+            return arr
+
+        arr.sort()
+        # pos = (len(arr) - 1) // 2; med = arr[pos]
+        med = arr[(len(arr) - 1) // 2]  # dear leet: don't use the term median please
+
+        arr.sort(key=lambda k: (abs(k - med), k), reverse=True)
+        return arr[:k]
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#Actual solution
+class Solution:
+    def getStrongest(self, arr: List[int], k: int) -> List[int]:
+        arr.sort()
+        mid = arr[(len(arr)-1)//2]
+        ans = []
+        l ,r = 0, len(arr)-1
+        while(l <= r):
+            if abs(arr[l] - mid) > abs(arr[r]-mid)  :
+                ans.append(arr[l])
+                l+=1
+            else:
+                ans.append(arr[r])
+                r-=1
+        return ans[:k]
