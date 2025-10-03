@@ -1,0 +1,64 @@
+# My solution but wrong.
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        def lengthll(head) -> int:
+            n = 0
+            while head:
+                head = head.next
+                n += 1
+            return n
+        if not head or k == 1:
+            return head
+        temp = ListNode(0)
+        temp.next = head
+        
+        le = lengthll(head)
+        h = le % k
+        a = (le - h)// k #---> To decide how many times to do the repeatition 
+
+        
+        # prev = None ---> New variant
+        prev = temp.next
+        tempval = head
+        for i in range(a):
+            tempval = prev.next
+            next_node = tempval.next
+            for i in range(1,k):
+                next_node = tempval.next
+                tempval.next = prev
+                prev = tempval
+                tempval = next_node
+            prev = tempval
+        return temp.next
+
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________________
+# I messed up the reversing algo. it's a different one, i wrote a generic one in the previous cases.
+# Took the reversing algo from the solns section
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        def lengthll(head) -> int:
+            n = 0
+            while head:
+                head = head.next
+                n += 1
+            return n
+        if not head or k == 1:
+            return head
+
+        temp = ListNode(0)
+        temp.next = head
+        count = lengthll(head)
+        a = (count - (count % k)) // k
+        # prev = None ---> New variant
+        prev = temp
+        tempval = head
+        for i in range(a):
+            tempval = prev.next
+            next_node = tempval.next
+            for i in range(1,k):
+                tempval.next = next_node.next
+                next_node.next = prev.next
+                prev.next = next_node
+                next_node = tempval.next
+            prev = tempval
+        return temp.next
