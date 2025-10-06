@@ -1,0 +1,23 @@
+#My code - Passed 554/780 cases
+class Solution(object):
+    def possibleStringCount(self, word):
+        a = 1
+        word = list(word)
+        arr = set(word)
+        for i in arr:
+            val = word.count(i)
+            if val > 1:
+                a += val - 1
+        return a
+#My approach was calculate up to the cost.
+____________________________________________________________________________________________________________________________________________________________________________
+#Soln from Soln section 
+#This approach was calculate down to the cost.
+
+class Solution(object):
+    def possibleStringCount(self, word):
+        count = n = len(word)
+        for i in range(1, n):
+            if word[i] != word[i - 1]:
+                count -= 1
+        return count
