@@ -1,0 +1,6 @@
+import string
+class Solution(object):
+    def reverseWords(self, s):
+        x = s.split(" ")
+        y = x[::-1]
+        return " ".join(a for a in y if a not in string.whitespace).strip()
