@@ -1,0 +1,12 @@
+#i wasn't able to solve at all, so i took solution's help
+class Solution(object):
+    def checkPowersOfThree(self, n):
+        while n > 0:
+            if n % 3 == 2:
+                return False
+            n //= 3
+        return True
+        """
+        :type n: int
+        :rtype: bool
+        """
