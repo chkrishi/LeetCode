@@ -1,0 +1,58 @@
+#Editorial Solution:
+class Solution(object):
+    def canBeValid(self, s, locked):
+        n = len(s)
+        open_possible = close_possible = 0
+        l = r = nt = 0 
+        s = [a for a in s]
+        if n % 2 == 1:
+            return False
+        # Left to right pass
+        for i in range(len(s)):
+            open_possible += 1 if locked[i] == '0' or s[i] == '(' else -1
+            if open_possible < 0:
+                return False
+        # Right to left pass
+        for i in range(len(s) - 1, -1, -1):
+            close_possible += 1 if locked[i] == '0' or s[i] == ')' else -1
+            if close_possible < 0:
+                return False
+        return True
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#My Solution
+# Nt are values that are either ( or ) with the locked value 0 since, they can be interchanged
+# r are values with ) and locked value 1, they can't be changed
+# l are values with ( and locked value 1, they can't be changed
+# if len(s)%2==0 , it's false as palindrome with this condition can't have odd length strings
+# if number of r and l are equal and nt is even then return True : if( r == l and nt%2 == 0)
+# if r is greater than l and the difference of r & l is less than or equal to number of nt, then we can balance them out: (r > l and r - l <= nt)
+# Vice - Versa for left: (l > r and l - r <= nt)
+# Only 250/258 cases Passed.
+class Solution(object):
+    def canBeValid(self, s, locked):
+        n = len(s)
+        l = r = nt = 0 
+        s = [a for a in s]
+        if n % 2 == 1:
+            return False
+        if (s[0] == ')' and locked[0] == '1') or (s[n-1] == '(' and locked[n-1] == '1'):
+            return False
+        elif (s[0] == ')' and locked[0] == '0') :
+            s[0] = '('
+        elif (s[n-1] == '(' and locked[n-1] == '0'):
+            s[n-1] = ')'
+        for i in range (0,n):
+            if s[i] == '(' and locked[i] == '1' :
+                l = l + 1 
+            elif s[i] == ')' and locked[i] == '1' :
+                r = r + 1
+            elif locked[i] == '0' :
+                nt = nt + 1
+        if r == l and nt%2 == 0:
+            return True
+        elif r > l and r - l <= nt:
+            return True
+        elif l > r and l - r <= nt:
+            return True
+        else :
+            return False
