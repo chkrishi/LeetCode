@@ -1,0 +1,20 @@
+#My soln with the help of Chatgpt
+class Solution(object):
+    def removeStars(self, s):
+        sl = ""
+        for i in range(len(s)):
+            if s[i] == "*":
+                sl = sl[:-1]
+            else :
+                sl += s[i]
+        return sl
+
+#Approach recommended by Leetcode
+def removeStars(self, s):
+        res = []
+        for c in s:
+            if c != '*':
+                res += c
+            elif res:
+                res.pop()
+        return ''.join(res)
