@@ -1,7 +1,0 @@
-class Solution(object):
-    def majorityElement(self, nums):
-        nums.sort()#we sort the elements 
-        return nums[len(nums)//2]#The most repeating number is the middle value so we return the median value using floor division (//)
-                     
-    
-        
