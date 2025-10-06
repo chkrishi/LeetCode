@@ -1,8 +1,0 @@
-class Solution(object):
-    def scoreOfString(self, s):
-        sum = 0
-        val = 0
-        for i in range(1,len(s)):
-            val = abs(ord(s[i]) - ord(s[i-1]))
-            sum = val + sum
-        return sum 
