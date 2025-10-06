@@ -1,0 +1,24 @@
+There was another soln with stack implementation, very much similar to this.
+Wasn't able to crack it.
+
+
+class Solution(object):
+    def minOperations(self, logs):
+        counter = 0
+        for x in logs:
+            if x == '../':
+                if counter <= 0:
+                    counter = 0
+                else :
+                    counter -=1
+            elif x =='./':
+                pass
+            else :
+                counter +=1
+        print(counter)
+        if counter <= 0:
+            counter = 0
+        return counter
+  ________________________________________________________
+
+        
