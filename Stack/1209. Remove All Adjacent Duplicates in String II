@@ -1,0 +1,29 @@
+#Solution from Solutions Section
+class Solution(object):
+    def removeDuplicates(self, s, k):
+        stack = []
+        
+        for char in s:
+            if stack and stack[-1][0] == char:
+                stack[-1] = (char, stack[-1][1] + 1)  # Increment count of the last character in stack
+                # If count reaches k, remove that group from the stack
+                if stack[-1][1] == k:
+                    stack.pop()
+            else:
+                stack.append((char, 1))  # Add new character to the stack
+                
+        # Rebuild the string from the stack
+        result = ''.join(char * count for char, count in stack)
+        return result
+__________________________________________________________________________________________________________________________________________________
+#My solution(19/21 Cases Accepted)
+class Solution(object):
+    def removeDuplicates(self, s, k):
+        i = 0
+        while i < len(s):
+            if s[i:k+i] == s[i]*k:
+                s = s.replace(s[i:k+i],"")
+                i = -1
+            i += 1
+        return s
+        
