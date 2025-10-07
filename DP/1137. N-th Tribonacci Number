@@ -1,0 +1,23 @@
+#Memoization approach
+class Solution:
+    def tribonacci(self, n: int) -> int:
+        dictval = {}
+        def rep(m, dictval):
+            if m == 0:
+                return 0
+            if m <= 2:
+                return 1
+            if m not in dictval:
+                dictval[m] = rep(m-1,dictval) + rep(m-2, dictval) + rep(m-3, dictval)
+            return dictval[m]
+        return rep(n, dictval)
+_______________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#RECURSIVE APPROACH
+class Solution:
+    def tribonacci(self, n: int) -> int:
+        if n == 0:
+            return 0
+        elif n == 1 or n == 2:
+            return 1
+        else:
+            return self.tribonacci(n - 1) + self.tribonacci(n - 2) + self.tribonacci(n - 3)
