@@ -1,0 +1,17 @@
+class Solution:
+    def countBits(self, n: int) -> List[int]:
+        def bits(m: int) -> int:
+            if m == 0:
+                stk.append(0)
+                return stk
+            elif m == 1:
+                stk.append(1)
+                stk.append(0)
+                return stk
+            else:
+                h = str(bin(m))
+                stk.append(int(h.count('1')))
+                bits(m-1)
+        stk = []
+        bits(n)
+        return stk[::-1]
