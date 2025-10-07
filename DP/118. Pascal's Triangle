@@ -1,0 +1,23 @@
+#My apporach - 30/30
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        def rep(n, stk):
+            if len(stk) == n:
+                return stk
+            else:
+                arr = []
+                arr.append(1)
+                tempval = stk[-1]
+                for i in range(0,len(tempval)-1):
+                    arr.append(tempval[i]+tempval[i+1])
+                arr.append(1)
+                stk.append(arr)
+                rep(n,stk)
+        if numRows == 1:
+            return [[1]]
+        if numRows == 2:
+            return [[1],[1,1]]
+        if numRows >= 3:
+            stk = [[1],[1,1]]
+            rep(numRows,stk)
+            return stk
