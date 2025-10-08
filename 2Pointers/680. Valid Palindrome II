@@ -1,0 +1,31 @@
+#My own soln, REJECTED
+class Solution:
+    def validPalindrome(self, s: str) -> bool:
+        if s == s[::-1]:
+            return True
+        for i in range(0,len(s)):
+            temp = s[:i] + s[i+1:]
+            if temp == temp[::-1]:
+                return True
+        return False
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+# From solns section -> similar to mine but with a 2 pointer approach 
+
+class Solution:
+    def validPalindrome(self, s: str) -> bool:
+            p1=0
+            p2=len(s)-1
+            while p1<=p2:
+                if s[p1]!=s[p2]:
+                    string1=s[:p1]+s[p1+1:]
+                    string2=s[:p2]+s[p2+1:]
+                    return string1==string1[::-1] or string2==string2[::-1]
+                p1+=1
+                p2-=1
+            return True
+
+-> Take 2 values, 0 and the whole string length.
+-> the left value must be less or equal to right vaue
+-> check if the strings are equal and same -> if yes: Increment left by 1 and decrement right by 1.
+                                           -> if no:  Create 2 diff. strings with skipping a character in b/w. return if either one of them are a palindrome. 
