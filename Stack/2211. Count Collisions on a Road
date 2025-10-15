@@ -1,4 +1,32 @@
-#My soln but failes
+#My solution but addes 6 lines with help of ai. Passed all solns
+class Solution:
+    def countCollisions(self, d: str) -> int:
+        if len(d) == 0: return 0
+        count = 0
+        stk = [i for i in d]
+        print(stk)
+        i = 1
+        while i < len(stk) :
+            if stk[i-1] == 'R' and stk[i] == 'L':
+                count += 2
+                stk[i-1] = 'S'
+                stk[i] = 'S'
+                i = max(1, i - 1)
+                continue
+            elif stk[i-1] == 'S' and stk[i] == 'L':
+                count += 1
+                stk[i] = 'S'
+                i = max(1, i - 1)
+                continue
+            elif stk[i-1] == 'R' and stk[i] == 'S':
+                count += 1
+                stk[i-1] = 'S'
+                i = max(1, i - 1)
+                continue
+            i += 1
+        return count
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#My soln but failed [25 / 119  cases passed]
 class Solution:
     def countCollisions(self, d: str) -> int:
         if len(d) == 0: return 0
