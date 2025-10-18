@@ -1,0 +1,36 @@
+#MY OWN SOLUTION BUT PASSED ONLY 552/560 cases.
+class Solution: 
+    def minimumAddedInteger(self, nums1: List[int], nums2: List[int]) -> int:
+        nums1 = sorted(nums1)
+        nums2 = sorted(nums2)
+        arr = []
+        for i in nums2:
+            for j in nums1:
+                arr.append(i-j)
+        setval = set(arr)
+        brr = []
+        for i in setval:
+            brr.append([arr.count(i),i])
+        brr = sorted(brr,key = lambda x:(x[0],-x[1]),reverse = True)
+        print(brr)
+        return brr[0][1]
+________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#Found in solutions section
+class Solution:
+    def minimumAddedInteger(self, nums1: List[int], nums2: List[int]) -> int:
+        nums1.sort()
+        nums2.sort()
+        N, M = len(nums1), len(nums2)
+        def equals(diff: int) -> bool:
+            i = j = 0
+            while i < N and j < M:
+                if nums2[j] == nums1[i] + diff:
+                    j += 1
+                i += 1
+            return True if j == M else False
+        for x in range(-1000, 1001):
+            if equals(x): return x
+        return -1 
+
+       
+        
