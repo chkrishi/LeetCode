@@ -1,0 +1,32 @@
+#Failed soln, My own --> 0/59
+class Solution:
+    def minSwaps(self, s: str) -> int:
+        lcount = s.count(']')
+        rcount = s.count('[')
+        count = abs(rcount - lcount)
+        return (count + 1) // 2
+________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#My own soln but TLE --> 55/59
+
+class Solution:
+    def minSwaps(self, s: str) -> int:
+        tempval = '[]'
+        templenval = -1
+        while templenval != len(s):
+            templenval = len(s)
+            s = s.replace(tempval,'')
+        count = 0
+        count = min(s.count('['),s.count(']'))
+        return (count + 1) // 2
+_________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#Accepted soln  from solns section--> 
+
+class Solution:
+    def minSwaps(self, s: str) -> int:
+        ans = 0
+        for c in s:
+            if c == '[':
+                ans += 1
+            elif ans > 0:
+                ans -= 1
+        return (ans + 1) // 2
