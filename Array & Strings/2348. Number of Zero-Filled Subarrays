@@ -1,0 +1,42 @@
+#My accepted soln [completely own]
+
+class Solution:
+    def zeroFilledSubarray(self, nums: List[int]) -> int:
+        if 0 not in nums:
+            return 0
+        arr = []
+        count = 0
+        temp = 0
+        dictval = {}
+        for i in nums:
+            if i == 0:
+                temp += 1
+            elif i != 0 and temp > 0:
+                arr.append(temp)
+                temp = 0
+            else:
+                temp = 0
+        if temp != 0:
+            arr.append(temp)
+            temp = 0
+        for i in arr:
+            if i in dictval:
+                count += dictval[i]
+            else:
+                dictval[i] = (i * (i + 1)) // 2
+                count += dictval[i]
+        return count
+
+________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#Better soln
+class Solution:
+    def zeroFilledSubarray(self, nums: List[int]) -> int:
+        count = 0
+        streak = 0
+        for num in nums:
+            if num == 0:
+                streak += 1
+                count += streak
+            else:
+                streak = 0
+        return count
