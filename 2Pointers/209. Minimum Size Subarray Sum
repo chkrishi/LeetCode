@@ -1,0 +1,55 @@
+#Soln intiution from chatGPT, and a few soln tweaks from GPT.
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        if target in nums:
+            return 1
+        if target > sum(nums):
+            return 0
+
+        i = 0
+        minval = float('inf')
+        temp = []
+        tempval = 0
+
+        while i < len(nums) or tempval >= target:
+            # Expand window
+            while i < len(nums) and tempval < target:
+                temp.append(nums[i])
+                tempval += nums[i]
+                i += 1
+
+            # Check if valid
+            if tempval >= target:
+                minval = min(minval, len(temp))
+
+            # Shrink window
+            while temp and tempval >= target:
+                tempval -= temp[0]
+                temp = temp[1:]
+                if tempval >= target:
+                    minval = min(minval, len(temp))
+
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#Suggested soln
+
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        n = len(nums)
+        left = 0
+        current_sum = 0
+        min_len = float('inf')
+
+        for right in range(n):
+            current_sum += nums[right]
+
+            # shrink window from the left while sum >= target
+            while current_sum >= target:
+                min_len = min(min_len, right - left + 1)
+                current_sum -= nums[left]
+                left += 1
+
+        return 0 if min_len == float('inf') else min_len
+
+
+
+        return 0 if minval == float('inf') else minval
