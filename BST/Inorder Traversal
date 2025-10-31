@@ -1,0 +1,13 @@
+class Solution:
+    def inorderTraversal(self, rootval: Optional[TreeNode]) -> List[int]:
+        def inot(root: TreeNode):
+            if not root:
+                return 
+            if root.left:
+                inot(root.left)
+            arr.append(root.val)
+            if root.right:
+                inot(root.right)
+        arr = []
+        inot(rootval)
+        return arr
