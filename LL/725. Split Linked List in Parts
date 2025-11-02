@@ -1,0 +1,76 @@
+#My original code with minor mistakes --> Not accepted
+
+
+class Solution:
+    def splitListToParts(self, head: Optional[ListNode], k: int) -> List[Optional[ListNode]]:
+        val = 0
+        temp = head
+        arr = []
+        while temp:
+            temp = temp.next
+            val += 1
+        split_val = val / k
+        carry_val = 1 if (val // k) != split_val else 0
+  
+        if carry_val == 1:
+            i = 0
+            retval, temp = head, head
+            dummy = retval
+            while i <= split_val + 1:
+                retval = temp.next
+            retval.next = None
+            arr.append(dummy)
+        
+        while temp:
+            retval = temp
+            dummy = retval
+            for i in range(0,split_val):
+                retval = temp
+                temp = temp.next
+            retval.next = None
+            arr.append(dummy)
+        
+        if k > val:
+            i = val
+            while i <= k:
+                arr.append([])
+        return arr
+
+
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+#Same idea but better implementaiton --> inspired by ChatGPT, written by me
+
+class Solution:
+    def splitListToParts(self, head: Optional[ListNode], k: int) -> List[Optional[ListNode]]:
+        val = 0
+        temp = head
+        arr = []
+
+        while temp:
+            temp = temp.next
+            val += 1
+        split_val = val // k
+        carry_val = val % k
+
+        temp = head
+
+        for _ in range(k):
+            length = split_val + (1 if carry_val > 0 else 0)
+            if carry_val > 0:
+                carry_val -= 1
+            
+            dummy = temp
+            retval = None
+            for i in range(length):
+                retval = temp
+                temp = temp.next
+            if retval:
+                retval.next = None
+            arr.append(dummy)
+        
+        return arr
+
+
+
+        
