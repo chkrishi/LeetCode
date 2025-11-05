@@ -1,0 +1,28 @@
+#My own thought but with better approach
+class Solution:
+    def flipEquiv(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
+        def recur(rootval1, rootval2):
+            if not rootval1 and not rootval2:
+                return True
+            elif not rootval1 or not rootval2:
+                return False
+            elif rootval1.val == rootval2.val:
+                return (recur(rootval1.left,rootval2.right) and recur(rootval1.right,rootval2.left)) or (recur(rootval1.left,rootval2.left) and recur(rootval1.right,rootval2.right))
+            else:
+                return False
+        return recur(root1,root2)
+
+____________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#Initial soln ---> Forgot that even if the trees are same, they are flip equivalent so took help of solns section 
+class Solution:
+    def flipEquiv(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
+        def recur(rootval1, rootval2):
+            if not rootval1 and not rootval2:
+                return True
+            elif not rootval1 or not rootval2:
+                return False
+            elif rootval1.val == rootval2.val:
+                return recur(rootval1.left,rootval2.right) or recur(rootval1.right,rootval2.left)
+            else:
+                return False
+        return recur(root1,root2)
