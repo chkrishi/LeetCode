@@ -1,0 +1,33 @@
+#Better solns --> DFS
+
+def dfs(self,root):
+        if root == None or root.left == None:
+            return
+        root.left.next = root.right
+        if root.next != None: 
+            root.right.next = root.next.left
+        self.dfs(root.left)
+        self.dfs(root.right)
+_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#My own soln --> Single shot Accepted ka Ghamand.
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root:
+            return root
+        
+        temp = deque([root])
+        while temp:
+            arr = []
+            for i in range(len(temp)):
+                node = temp.popleft()
+                if node.left:
+                    arr.append(node.left)
+                if node.right:
+                    arr.append(node.right)
+            for i in range(0,len(arr)-1):
+                arr[i].next = arr[i+1]
+                temp.append(arr[i])
+            if arr:
+                arr[-1].next = None
+                temp.append(arr[-1])  
+        return root
