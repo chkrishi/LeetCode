@@ -1,0 +1,15 @@
+#Soln from solns section
+
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        def inorder(root, nodes, values):
+            if root:
+                inorder(root.left, nodes, values)
+                nodes.append(root)
+                values.append(root.val)
+                inorder(root.right, nodes, values)
+        nodes , values = [] , []
+        inorder(root,nodes,values)
+        values = sorted(values)
+        for i in range(0,len(values)):
+            nodes[i].val = values[i]
