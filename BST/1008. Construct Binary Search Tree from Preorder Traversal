@@ -1,0 +1,19 @@
+#Own soln
+
+class Solution:
+    def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
+
+        def bst(root, value):
+            if root.val > value and not root.left:
+                root.left = TreeNode(value)
+            elif root.val < value and not root.right:
+                root.right = TreeNode(value)
+            elif root.val > value and root.left:
+                bst(root.left,value)
+            elif root.val < value and root.right:
+                bst(root.right,value)
+
+        root = TreeNode(preorder[0])
+        for i in range(1, len(preorder)):
+            bst(root,preorder[i])
+        return root
