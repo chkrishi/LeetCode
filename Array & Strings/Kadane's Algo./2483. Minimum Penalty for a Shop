@@ -1,0 +1,15 @@
+class Solution:
+    def bestClosingTime(self, customers: str) -> int:
+        arr = []
+        val = 0
+        maxval = 0
+        retval = -1
+        for i in range(0,len(customers)):
+            if customers[i] == 'Y':
+                val += 1
+            else:
+                val -= 1
+            if val > maxval:
+                    maxval = val
+                    retval = i
+        return retval + 1
