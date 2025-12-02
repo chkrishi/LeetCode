@@ -1,0 +1,37 @@
+# From solns section --> Accepted
+class Solution:
+    def isSubPath(self, head: Optional[ListNode], root: Optional[TreeNode]) -> bool:
+        def dfs(root,head):
+            if not head:
+                return True
+            if not root or head.val != root.val:
+                return False
+            return dfs(root.left, head.next) or dfs(root.right, head.next)
+
+        if not root:
+            return False
+        if dfs(root,head):
+            return True
+        return self.isSubPath(head, root.left) or self.isSubPath(head, root.right)
+
+
+____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+# My inital approach but didnt even pass a single test case :(
+class Solution:
+    def isSubPath(self, head: Optional[ListNode], root: Optional[TreeNode]) -> bool:
+        def dfs(root,head):
+            if not head:
+                return True
+            if not root:
+                return
+            if root.val == head.val and root.left and head.next :
+                dfs(root.left,head.next)
+            if root.val == head.val and root.right and head.next :
+                dfs(root.right,head.next)
+                dfs(root.right, head)
+            else:
+                dfs(root.left,head)
+                dfs(root.right,head)
+        temp = dfs(root,head)
+        return temp if temp else False
+        
