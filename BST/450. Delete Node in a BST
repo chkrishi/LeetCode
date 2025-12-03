@@ -1,0 +1,65 @@
+# My initial Idea which didnt work out btw.
+class Solution:
+    def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
+        def successor(root , val):
+            if not root:
+                return float('inf')
+            if root.left < val < root.right:
+                successor(root.left,val)
+            else:
+                return root.left
+            
+        def dfs(root):
+            if not root:
+                return 
+            if root.left and root.left.val == key:
+                deln = root.left
+                if not deln.left and not deln.right:
+                    return dfs(root.right)
+                elif deln.left or deln.right:
+
+
+
+            elif root.right and root.right.val == key:
+                deln = root.right
+                if not deln.right and not deln.left:
+                    return 
+                elif deln.right or deln.left:
+
+            else:
+                return dfs(root.left) and dfs(root.right)
+        return dfs(root)
+________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+class Solution: --> from solns
+    def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
+            if not root:
+                return None
+        
+        # Step 1: Search for the node to delete
+        if key < root.val:
+            root.left = self.deleteNode(root.left, key)
+        elif key > root.val:
+            root.right = self.deleteNode(root.right, key)
+        else:
+            # Node found → handle deletion cases
+            
+            # Case 1: No left child
+            if not root.left:
+                return root.right
+
+            # Case 2: No right child
+            if not root.right:
+                return root.left
+            
+            # Case 3: Both children exist → find inorder successor
+            successor = self.getMin(root.right)
+            root.val = successor.val                 # Replace value
+            root.right = self.deleteNode(root.right, successor.val)   # Delete successor
+        
+        return root
+
+    # Helper to find min in right subtree (inorder successor)
+    def getMin(self, node):
+        while node.left:
+            node = node.left
+        return node
