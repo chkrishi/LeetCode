@@ -1,0 +1,58 @@
+#My initial soln, 73/120 test cases passed.
+
+class Solution:
+    def isCompleteTree(self, root: Optional[TreeNode]) -> bool:
+        def dfs(root: TreeNode):
+            if not root:
+                return True
+            if root.right and not root.left:
+                return False
+            return dfs(root.left) and dfs(root.right)
+        return dfs(root)
+
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+#Another intiution, didnt work
+
+class Solution:
+    def isCompleteTree(self, root: Optional[TreeNode]) -> bool:
+        def lvl(root):
+            if not root:
+                return -1
+            return 1 + max(lvl(root.left), lvl(root.right))
+        
+        h = lvl(root)
+
+        temp = deque([root])
+        while temp:
+            arr = []
+            i = 0
+            for i in range(len(temp)):
+                node = temp.popleft()
+                if node.left:
+                    temp.append(node.left)
+                if node.right:
+                    temp.append(node.right)
+                arr.append(node.val)
+            
+            if len(arr) != 2 ** i:
+                return False
+            i += 1
+
+        return True
+
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#From solns that worked
+class Solution:
+    def isCompleteTree(self, root: Optional[TreeNode]) -> bool:
+        temp = deque([root])
+        prev = root
+        while temp:
+            node = temp.popleft()
+            if node:
+                if not prev:
+                    return False
+                temp.append(node.left)
+                temp.append(node.right)
+            prev = node
+        return True
