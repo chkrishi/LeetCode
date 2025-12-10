@@ -1,0 +1,40 @@
+# My initial soln 82/102 solved 
+class Solution:
+    def checkSubarraySum(self, nums: List[int], k: int) -> bool:
+        if not nums:
+            return -1
+       
+        pref = [nums[0]]
+        for i in range(1,len(nums)):
+            val = nums[i] + pref[i - 1]
+            temp = val % k
+            if temp == 0 or temp in pref:
+                return True
+            pref.append(val)
+        return False
+
+Drawbacks with this soln:
+1. Wrong Lookup (temp in pref) pref stores raw prefix sums, not prefix remainders but remainder vs remainder.
+2. You aren't comparing the min length of 2
+
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+# Soln from chatgpt
+class Solution:
+    def checkSubarraySum(self, nums: List[int], k: int) -> bool:
+        if not nums:
+            return -1
+        if k == 0:
+            return True
+
+        dictval = {0: -1}
+        pref = 0
+
+        for i in range(len(nums)):
+            pref += nums[i] 
+            temp = pref % k
+            if temp in dictval:
+                if i - dictval[temp] >= 2:
+                    return True
+            else:
+                dictval[temp] = i   # save the remainder value at the index i
+        return False
