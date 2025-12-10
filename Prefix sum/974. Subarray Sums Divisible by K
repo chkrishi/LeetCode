@@ -1,0 +1,22 @@
+# Changed 2 lines[7,17,18] with the help of chatgpt ; Rest of the code is my own.
+class Solution:
+    def subarraysDivByK(self, nums: List[int], k: int) -> int:
+        if len(nums) == 0:
+            return 0
+        
+        dictval = {0:1}
+
+        val = 0
+        pref = 0
+
+        for i in nums:
+            pref += i
+            temp = pref % k
+
+            if temp in dictval:
+                val += dictval[temp]
+                dictval[temp] += 1
+            else:
+                dictval[temp] = 1
+
+        return val
