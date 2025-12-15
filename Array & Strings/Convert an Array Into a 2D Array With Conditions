@@ -1,0 +1,44 @@
+
+#From solns, my idea but instead of manual counting, they have used counter
+from collections import Counter
+from typing import List
+
+class Solution:
+    def findMatrix(self, nums: List[int]) -> List[List[int]]:
+        freq = Counter(nums)
+        result = []
+
+        while freq:
+            row = []
+            for num in list(freq.keys()):
+                row.append(num)
+                freq[num] -= 1
+                if freq[num] == 0:
+                    del freq[num]
+            result.append(row)
+
+        return result
+_________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+#My initial idea but with minor flaws.
+class Solution:
+    def findMatrix(self, nums: List[int]) -> List[List[int]]:
+        arr = []
+
+        setval = set(nums)
+        freq = {}
+
+        for i in setval:
+            freq[i] = nums.count(i)
+        maxval = max(freq)
+
+        for i in range(maxval):
+            val = []
+            for j in setval:
+                if freq[j] > 0:
+                    val.append(j)
+                    freq[j] -= 1
+                else:
+                    setval.delete(j)
+            if val:
+                arr.append(val)
+        return arr                        
