@@ -1,0 +1,37 @@
+from collections import deque
+
+class Solution:
+    def isEvenOddTree(self, root: Optional[TreeNode]) -> bool:
+        temp = deque([root])
+        boolval = False
+
+        while temp:
+            arr = []
+
+            for i in range(len(temp)):
+                node = temp.popleft()
+                arr.append(node.val)
+
+                if node.left:
+                    temp.append(node.left)
+                if node.right:
+                    temp.append(node.right)
+
+            if not boolval:
+                if any(x % 2 == 0 for x in arr):
+                    return False
+
+                for i in range(1, len(arr)):
+                    if arr[i] <= arr[i - 1]:
+                        return False
+            else:
+                if any(x % 2 == 1 for x in arr):
+                    return False
+
+                for i in range(1, len(arr)):
+                    if arr[i] >= arr[i - 1]:
+                        return False
+
+            boolval = not boolval
+
+        return True
